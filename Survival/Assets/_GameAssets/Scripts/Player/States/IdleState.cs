@@ -12,7 +12,6 @@ public class IdleState : IState
         _player = player;
         _stateMachine = stateMachine;
         _animation = _player.PlayerAnimationController;
-
     }
 
     public void Enter()
@@ -22,6 +21,11 @@ public class IdleState : IState
 
     public void Update()
     {
+        if (_player.CanRoll)
+        {
+            _stateMachine.ChangeState(_player.States.RollState);
+        }
+
         if (_player.Input.IsRunKeyPressed && _player.IsMoving)
         {
             _stateMachine.ChangeState(_player.States.RunState);

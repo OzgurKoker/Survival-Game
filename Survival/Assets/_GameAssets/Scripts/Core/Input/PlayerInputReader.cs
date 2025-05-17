@@ -8,6 +8,7 @@ public class PlayerInputReader : MonoBehaviour, IPlayerInput
 
     public Vector2 Move => _playerInputActions.Player.Move.ReadValue<Vector2>();
     public bool IsRunKeyPressed => _playerInputActions.Player.Run.IsPressed();
+    public bool IsRollKeyPressed => _playerInputActions.Player.Roll.IsPressed();
 
     private void Awake()
     {

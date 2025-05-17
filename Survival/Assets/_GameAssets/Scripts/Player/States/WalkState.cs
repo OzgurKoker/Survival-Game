@@ -11,7 +11,6 @@ public class WalkState : IState
         _player = player;
         _stateMachine = stateMachine;
         _animation = _player.PlayerAnimationController;
-
     }
 
     public void Enter()
@@ -21,6 +20,11 @@ public class WalkState : IState
 
     public void Update()
     {
+        if (_player.CanRoll)
+        {
+            _stateMachine.ChangeState(_player.States.RollState);
+        }
+
         if (_player.Input.IsRunKeyPressed)
         {
             _stateMachine.ChangeState(_player.States.RunState);
@@ -36,7 +40,7 @@ public class WalkState : IState
 
     public void FixedUpdate()
     {
-        _player.Move(_player.MoveDirection,_player.MoveSpeed);
+        _player.Move(_player.MoveDirection, _player.MoveSpeed);
     }
 
     public void Exit()

@@ -5,10 +5,20 @@ using UnityEngine.Rendering.UI;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
+    [Header("References")]
     private Animator _animator;
-
     private PlayerAnimState _currentState;
 
+    
+    
+
+    #region Publics
+
+   
+    public AnimatorStateInfo StateInfo => _animator.GetCurrentAnimatorStateInfo(0);
+
+
+    #endregion
 
     private void Awake()
     {
@@ -27,21 +37,24 @@ public class PlayerAnimationController : MonoBehaviour
         switch (newState)
         {
             case PlayerAnimState.Idle:
-                _animator.SetBool("IsIdle", true);
-                _animator.SetBool("IsWalking", false);
-                _animator.SetBool("IsRunning", false);
+                _animator.SetBool(Consts.PlayerAnimations.IS_IDLE, true);
+                _animator.SetBool(Consts.PlayerAnimations.IS_WALKING, false);
+                _animator.SetBool(Consts.PlayerAnimations.IS_RUNNING, false);
                 break;
 
             case PlayerAnimState.Walk:
-                _animator.SetBool("IsIdle", false);
-                _animator.SetBool("IsWalking", true);
-                _animator.SetBool("IsRunning", false);
+                _animator.SetBool(Consts.PlayerAnimations.IS_IDLE, false);
+                _animator.SetBool(Consts.PlayerAnimations.IS_WALKING, true);
+                _animator.SetBool(Consts.PlayerAnimations.IS_RUNNING, false);
                 break;
 
             case PlayerAnimState.Run:
-                _animator.SetBool("IsIdle", false);
-                _animator.SetBool("IsWalking", false);
-                _animator.SetBool("IsRunning", true);
+                _animator.SetBool(Consts.PlayerAnimations.IS_IDLE, false);
+                _animator.SetBool(Consts.PlayerAnimations.IS_WALKING, false);
+                _animator.SetBool(Consts.PlayerAnimations.IS_RUNNING, true);
+                break;
+            case PlayerAnimState.Roll:
+                _animator.SetTrigger(Consts.PlayerAnimations.ROLL_TRIGGER);
                 break;
         }
     }
@@ -52,5 +65,6 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.SetBool("IsIdle", false);
         _animator.SetBool("IsWalking", false);
         _animator.SetBool("IsRunning", false);
+        _animator.ResetTrigger("RollTrigger");
     }
 }

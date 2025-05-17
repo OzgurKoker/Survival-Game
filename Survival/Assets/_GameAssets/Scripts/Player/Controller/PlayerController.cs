@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     #region Publics
 
     public bool IsMoving => _playerInput.Move.sqrMagnitude > 0.01f;
-
+    public bool CanRoll => _playerInput.IsRollKeyPressed && IsMoving;
     public IPlayerInput Input => _playerInput;
     public PlayerAnimationController PlayerAnimationController => _playerAnimationController;
     public float MoveSpeed => _playerInput.IsRunKeyPressed ? _moveSpeed * _speedMultiplier : _moveSpeed;
@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
         _stateMachine.FixedUpdate();
     }
 
-  
 
     public void Move(Vector3 moveDirection, float speed)
     {
@@ -76,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     private void RotateTowards(Vector3 moveDirection, float rotationSpeed)
     {
+        if (moveDirection == Vector3.zero) return;
+
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
         _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, targetRotation,
             rotationSpeed * Time.fixedDeltaTime));
