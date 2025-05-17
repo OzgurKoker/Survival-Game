@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     private IPlayerInput _playerInput;
     private Rigidbody _rigidbody;
+    [SerializeField] private Transform _cameraTransform;
 
     [Header("Settings")]
     [SerializeField] private float _moveSpeed = 5f;
@@ -41,15 +42,29 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+
     private void HandleMovement()
     {
         Vector2 moveInput = _playerInput.Move;
-        Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-        Vector3 moveVelocity = moveDirection.normalized * _moveSpeed;
 
+        Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y);
+
+        Vector3 moveDirection = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0) * inputDir;
+        moveDirection.Normalize();
+
+        Vector3 moveVelocity = moveDirection * _moveSpeed;
         Vector3 newPosition = _rigidbody.position + moveVelocity * Time.fixedDeltaTime;
+
         _rigidbody.MovePosition(newPosition);
+
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, targetRotation, 10f * Time.fixedDeltaTime));
+        }
     }
+
+
 
     private void HandleJump()
     {
