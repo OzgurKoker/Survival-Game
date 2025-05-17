@@ -843,12 +843,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraTransform: {fileID: 965969272}
   _moveSpeed: 5
-  _speedMultiplier: 2
-  _jumpForce: 2.5
-  _groundCheckDistance: 0.2
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
+  _speedMultiplier: 1.3
+  _rotationSpeed: 10
 --- !u!114 &1081196760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2362,6 +2358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1438546958929237099}
   - component: {fileID: 4540228999854259470}
+  - component: {fileID: 4540228999854259471}
   m_Layer: 0
   m_Name: PlayerVisual
   m_TagString: Untagged
@@ -4267,6 +4264,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4540228999854259471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501078912721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b925e22ff8ac14b11918654bd3f31e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4548762040152015135
 Transform:
   m_ObjectHideFlags: 0
