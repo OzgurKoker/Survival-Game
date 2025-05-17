@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInputReader : MonoBehaviour, IPlayerInput
@@ -7,6 +8,8 @@ public class PlayerInputReader : MonoBehaviour, IPlayerInput
 
     public Vector2 Move => _playerInputActions.Player.Move.ReadValue<Vector2>();
     public bool IsJumpPressed => _playerInputActions.Player.Jump.IsPressed();
+    public bool IsRunKeyPressed => _playerInputActions.Player.Run.IsPressed();
+
     private void Awake()
     {
         _playerInputActions = new PlayerInputActions();

@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _speedMultiplier = 1.5f;
+
     [SerializeField] private float _jumpForce = 2.5f;
     [SerializeField] private float _groundCheckDistance = 0.3f;
     [SerializeField] private LayerMask _groundMask;
@@ -27,20 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckGround();
+        //CheckGround();
         HandleMovement();
-        HandleJump();
+        //HandleJump();
     }
-
-
-    private void CheckGround()
-    {
-        Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
-        float rayLength = _groundCheckDistance;
-        Debug.DrawRay(rayOrigin, Vector3.down * rayLength, Color.red);
-        _isGrounded = Physics.Raycast(rayOrigin, Vector3.down, rayLength, _groundMask);
-    }
-
 
 
     private void HandleMovement()
@@ -52,7 +44,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0) * inputDir;
         moveDirection.Normalize();
 
-        Vector3 moveVelocity = moveDirection * _moveSpeed;
+        float speedMultiplier = _playerInput.IsRunKeyPressed ? _speedMultiplier : 1f;
+
+        Vector3 moveVelocity = moveDirection * (_moveSpeed * speedMultiplier);
         Vector3 newPosition = _rigidbody.position + moveVelocity * Time.fixedDeltaTime;
 
         _rigidbody.MovePosition(newPosition);
@@ -64,7 +58,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    private void CheckGround()
+    {
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
+        float rayLength = _groundCheckDistance;
+        Debug.DrawRay(rayOrigin, Vector3.down * rayLength, Color.red);
+        _isGrounded = Physics.Raycast(rayOrigin, Vector3.down, rayLength, _groundMask);
+    }
 
     private void HandleJump()
     {

@@ -145,7 +145,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69168910}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5fdc4f4693777462a9f5766524ad9e91, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -843,6 +843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraTransform: {fileID: 965969272}
   _moveSpeed: 5
+  _speedMultiplier: 2
   _jumpForce: 2.5
   _groundCheckDistance: 0.2
   _groundMask:
@@ -886,7 +887,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172254340}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5fdc4f4693777462a9f5766524ad9e91, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1251,7 +1252,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121559782}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5fdc4f4693777462a9f5766524ad9e91, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
