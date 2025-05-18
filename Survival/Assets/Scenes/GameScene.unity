@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 965969272}
   - component: {fileID: 965969274}
   - component: {fileID: 965969273}
-  - component: {fileID: 965969276}
+  - component: {fileID: 965969277}
   - component: {fileID: 965969275}
   m_Layer: 0
   m_Name: IsometricCamera
@@ -760,8 +760,10 @@ MonoBehaviour:
   _zoomSpeed: 0.5
   _minDistance: 1
   _maxDistance: 5
-  _smoothTime: 0.1
---- !u!114 &965969276
+  _zoomSmoothTime: 0.1
+  _rotationAmount: 90
+  _rotationSmoothTime: 20
+--- !u!114 &965969277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -770,7 +772,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 965969271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36e9dcce47d4b4fc9987b9b88d389346, type: 3}
+  m_Script: {fileID: 11500000, guid: b4934d728e364327861eb6f53acbaec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1081196755

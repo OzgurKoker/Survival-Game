@@ -25,7 +25,7 @@ public class WalkState : IState
             _stateMachine.ChangeState(_player.States.RollState);
         }
 
-        if (_player.Input.IsRunKeyPressed)
+        if (_player.IsRunning)
         {
             _stateMachine.ChangeState(_player.States.RunState);
             return;

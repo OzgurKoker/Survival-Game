@@ -26,7 +26,7 @@ public class IdleState : IState
             _stateMachine.ChangeState(_player.States.RollState);
         }
 
-        if (_player.Input.IsRunKeyPressed && _player.IsMoving)
+        if (_player.IsRunning && _player.IsMoving)
         {
             _stateMachine.ChangeState(_player.States.RunState);
             return;

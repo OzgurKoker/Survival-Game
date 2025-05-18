@@ -18,6 +18,7 @@ public class RollState : IState
     public void Enter()
     {
         _animation.ChangeState(PlayerAnimState.Roll);
+        _player.CanRoll = false;
     }
 
     public void Update()
@@ -25,13 +26,13 @@ public class RollState : IState
         if (_animation.StateInfo.IsName(Consts.PlayerAnimations.PlayerAnimatorClipNames.ROLL_ANIM) &&
             _animation.StateInfo.normalizedTime >= 1f)
         {
-            if (_player.Input.IsRunKeyPressed)
+            if (_player.IsRunning)
             {
                 _stateMachine.ChangeState(_player.States.RunState);
                 return;
             }
 
-            if (!_player.Input.IsRunKeyPressed && _player.IsMoving)
+            if (!_player.IsRunning && _player.IsMoving)
             {
                 _stateMachine.ChangeState(_player.States.WalkState);
                 return;
