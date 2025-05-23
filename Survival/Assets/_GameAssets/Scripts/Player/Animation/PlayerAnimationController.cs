@@ -9,14 +9,10 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator _animator;
     private PlayerAnimState _currentState;
 
-    
-    
 
     #region Publics
 
-   
     public AnimatorStateInfo StateInfo => _animator.GetCurrentAnimatorStateInfo(0);
-
 
     #endregion
 
@@ -32,7 +28,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         _currentState = newState;
 
-        ResetAllAnimatorBools();
+        ResetAllAnimatorParameters();
 
         switch (newState)
         {
@@ -60,11 +56,11 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
 
-    private void ResetAllAnimatorBools()
+    private void ResetAllAnimatorParameters()
     {
-        _animator.SetBool("IsIdle", false);
-        _animator.SetBool("IsWalking", false);
-        _animator.SetBool("IsRunning", false);
-        _animator.ResetTrigger("RollTrigger");
+        _animator.SetBool(Consts.PlayerAnimations.IS_IDLE, false);
+        _animator.SetBool(Consts.PlayerAnimations.IS_WALKING, false);
+        _animator.SetBool(Consts.PlayerAnimations.IS_RUNNING, false);
+        _animator.ResetTrigger(Consts.PlayerAnimations.ROLL_TRIGGER);
     }
 }

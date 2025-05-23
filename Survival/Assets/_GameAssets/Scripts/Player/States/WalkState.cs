@@ -40,7 +40,6 @@ public class WalkState : IState
 
     public void FixedUpdate()
     {
-        _player.Move(_player.MoveDirection, _player.MoveSpeed);
     }
 
     public void Exit()

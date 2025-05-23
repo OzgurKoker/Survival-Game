@@ -3,6 +3,7 @@ using Microsoft.Win32.SafeHandles;
 using Unity.Cinemachine;
 using UnityEngine;
 
+[RequireComponent(typeof(CinemachineCamera))]
 public class CameraController : MonoBehaviour
 {
     [Header("References")]

@@ -16,9 +16,10 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Settings")]
-    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _walkSpeed = 5f;
     [SerializeField] private float _speedMultiplier = 1.3f;
     [SerializeField] private float _rotationSpeed = 10f;
+    private float _moveSpeed => _isRunning ? _walkSpeed * _speedMultiplier : _walkSpeed;
 
 
     private bool _isRunning = false;
@@ -34,10 +35,8 @@ public class PlayerController : MonoBehaviour
         set => _canRoll = value;
     }
     public bool IsRunning => _isRunning;
-    public PlayerInputReader Input => _playerInputReader;
+
     public PlayerAnimationController PlayerAnimationController => _playerAnimationController;
-    public float MoveSpeed => _isRunning ? _moveSpeed * _speedMultiplier : _moveSpeed;
-    public Vector3 MoveDirection => CalculateMoveDirection();
 
     #endregion
 
@@ -77,23 +76,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _stateMachine.FixedUpdate();
+        Move(CalculateMoveDirection(), _moveSpeed);
     }
 
 
-    public void Move(Vector3 moveDirection, float speed)
+    private void Move(Vector3 moveDirection, float speed)
     {
         Vector3 velocity = moveDirection * speed;
         Vector3 newPosition = _rigidbody.position + velocity * Time.fixedDeltaTime;
         _rigidbody.MovePosition(newPosition);
         RotateTowards(moveDirection, _rotationSpeed);
-    }
-
-    private Vector3 CalculateMoveDirection()
-    {
-        Vector2 input = _playerInputReader.Move;
-        Vector3 inputDir = new Vector3(input.x, 0f, input.y);
-        Vector3 moveDirection = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0) * inputDir;
-        return moveDirection.normalized;
     }
 
     private void RotateTowards(Vector3 moveDirection, float rotationSpeed)
@@ -103,5 +95,13 @@ public class PlayerController : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
         _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, targetRotation,
             rotationSpeed * Time.fixedDeltaTime));
+    }
+
+    private Vector3 CalculateMoveDirection()
+    {
+        Vector2 input = _playerInputReader.Move;
+        Vector3 inputDir = new Vector3(input.x, 0f, input.y);
+        Vector3 moveDirection = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0) * inputDir;
+        return moveDirection.normalized;
     }
 }
